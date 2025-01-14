@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import vision.psy.flacdump.model.Track;
-import vision.psy.flacdump.track.TrackNotFoundException;
+import vision.psy.flacdump.exceptions.TrackNotFoundException;
 import vision.psy.flacdump.repository.TrackRepository;
 
 import java.util.List;

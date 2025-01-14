@@ -1,4 +1,4 @@
-package vision.psy.flacdump.track;
+package vision.psy.flacdump.exceptions;
 
 public class TrackNotFoundException extends RuntimeException {
     public TrackNotFoundException() {

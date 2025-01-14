@@ -9,11 +9,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class UserService {
+    final static String usernameDB = System.getenv("DB_USERNAME");
+    final static String passwordDB = System.getenv("DB_PASSWORD");
+    final static String connectionString = "jdbc:mysql://localhost:3306/flacdump";
+
     // User registrieren
     public static boolean register(int id, String name, String password, String mail) {
-        String connectionString = "jdbc:mysql://localhost:3306/flacdump";
         boolean success = false;
-        try (Connection connection = DriverManager.getConnection(connectionString, "root", "#!datenbankenJavaGuru");
+        try (Connection connection = DriverManager.getConnection(connectionString, usernameDB, passwordDB);
              PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO useraccount (id, name, password, mail) VALUES (?, ?, ?, ?)");) {
             preparedStatement.setInt(1, id);
             preparedStatement.setString(2, name);
@@ -44,8 +47,7 @@ public class UserService {
 
     // User Login
     public static UserAccount login(String username, String password) {
-        String connectionString = "jdbc:mysql://localhost:3306/flacdump";
-        try (Connection connection = DriverManager.getConnection(connectionString, "root", "#!datenbankenJavaGuru");
+        try (Connection connection = DriverManager.getConnection(connectionString, usernameDB, passwordDB);
              Statement statement = connection.createStatement();) {
             ResultSet rs = statement.executeQuery("SELECT * FROM useraccount WHERE name = '" + username + "'");
             if (rs.next()) {
@@ -71,7 +73,6 @@ public class UserService {
             System.out.println("Es ist ein Datenbankfehler aufgetreten.");
             e.printStackTrace();
             return null;
-
         }
         return null;
     }
@@ -83,9 +84,8 @@ public class UserService {
         // altes Passwort verschlüsseln
 
         String altesPasswortEncrypted = UserAccount.encode(altesPasswort);
-        String connectionString = "jdbc:mysql://localhost:3306/flacdump";
 
-        try (Connection connection = DriverManager.getConnection(connectionString, "root", "#!datenbankenJavaGuru");
+        try (Connection connection = DriverManager.getConnection(connectionString, usernameDB, passwordDB);
              Statement statement = connection.createStatement();) {
             ResultSet rs = statement.executeQuery("SELECT password FROM useraccount WHERE name = '" + username + "'");
             String passwortEncryptedAusDB = null;
