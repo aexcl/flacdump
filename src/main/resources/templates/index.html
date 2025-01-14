@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PsyDump - Main</title>
+  <style>
+    body {
+      background-color: #2b3a33;
+      color: #e5e5e5;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 1rem;
+    }
+    header {
+      width: 100%;
+      height: 300px;
+      background: url('/images/header5.webp') no-repeat center center;
+      background-size: cover;
+    }
+    .upload-container {
+      text-align: center;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Welcome to PsyDump</h1>
+    <p>Upload and manage your high-quality audio files.</p>
+  </div>
+  <div class="upload-container">
+    <button onclick="uploadFolder()">Upload Folder</button>
+  </div>
+  <script>
+    function uploadFolder() {
+      alert("This button will open a folder selection dialog for file upload. Implement functionality with backend integration.");
+    }
+  </script>
+</body>
+</html>
+
