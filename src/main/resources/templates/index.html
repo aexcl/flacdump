@@ -6,48 +6,95 @@
   <title>PsyDump - Main</title>
   <style>
     body {
-      background-color: #2b3a33;
-      color: #e5e5e5;
-      font-family: Arial, sans-serif;
+      background-color: #1e2a26;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      padding: 1rem;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      line-height: 1.6;
     }
+
     header {
       width: 100%;
-      height: 300px;
-      background: url('/images/header5.webp') no-repeat center center;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/header5.webp') no-repeat center center;
       background-size: cover;
-    }
-    .upload-container {
       text-align: center;
+      padding: 2rem 0;
     }
-    button {
+
+    header h1 {
+      font-size: 3rem;
+      color: #4caf50;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .content {
+      text-align: center;
+      margin: 2rem auto;
+      width: 90%;
+      max-width: 600px;
+      background-color: #2e3c37;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .content button {
       background-color: #4caf50;
       color: white;
       border: none;
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      border-radius: 5px;
+      padding: 0.8rem 1.6rem;
+      font-size: 1.1rem;
+      border-radius: 50px;
       cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     }
-    button:hover {
+
+    .content button:hover {
       background-color: #45a049;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      background-color: #25322e;
+      color: #d1d1d1;
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    <h1>Welcome to PsyDump</h1>
-    <p>Upload and manage your high-quality audio files.</p>
-  </div>
-  <div class="upload-container">
-    <button onclick="uploadFolder()">Upload Folder</button>
-  </div>
-  <script>
-    function uploadFolder() {
-      alert("This button will open a folder selection dialog for file upload. Implement functionality with backend integration.");
-    }
-  </script>
+<header>
+  <h1>Welcome to PsyDump</h1>
+  <p>Your ultimate platform for high-quality audio management.</p>
+</header>
+
+<div class="content">
+  <p>Easily upload, organize, and share your audio files with PsyDump. Click below to get started:</p>
+  <button onclick="uploadFolder()">Upload Folder</button>
+</div>
+
+<footer>
+  &copy; 2025 PsyDump. All rights reserved.
+</footer>
+
+<script>
+  function uploadFolder() {
+    alert("Feature coming soon: Folder upload functionality for your audio files!");
+  }
+</script>
 </body>
 </html>
-
