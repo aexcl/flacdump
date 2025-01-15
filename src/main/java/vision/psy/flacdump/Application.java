@@ -6,13 +6,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import vision.psy.flacdump.service.UserService;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "vision.psy.flacdump")
 public class Application {
 
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(Application.class, args);
-		UserService.login("testnutzer","testpasswort");
+		// UserService.register(1, "admin", "admin", "testmail");
 	}
 }
