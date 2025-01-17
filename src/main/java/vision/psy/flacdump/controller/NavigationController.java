@@ -12,6 +12,7 @@ import vision.psy.flacdump.model.UserAccount;
 import vision.psy.flacdump.service.TrackService;
 import vision.psy.flacdump.service.UserService;
 
+// Überarbeitung mit Spring Security
 
 @Controller
 public class NavigationController {
@@ -40,10 +41,11 @@ public class NavigationController {
         return "upload";
     }
 
-    @GetMapping("/index")
-    public String index() {
-        return "index";
-    }
+//    @GetMapping("/index")
+//    public String index() {
+//        return "index";
+//    }
+
 
     @PostMapping("/login")
     public String authenticate(@RequestParam String username, @RequestParam String password, Model model) {
@@ -64,11 +66,16 @@ public class NavigationController {
             @RequestParam("title") String title,
             Model model
     ) {
-        Track track = new Track(null, artist, label, title, null, null, null, null, null, null, null, null, null);
-        Track savedTrack = trackService.uploadTrack(file, track);
-        // Hier noch Upload-Status zurückgeben (Upload erfolgreich, fehlgeschlagen o.Ä.)
-        model.addAttribute("message", "Upload successful");
-        model.addAttribute("track", savedTrack);
+        try{
+            Track track = new Track(null, artist, label, title, null, null, null, null, null, null, null, null, null);
+            Track savedTrack = trackService.uploadTrack(file, track);
+            model.addAttribute("message", "Upload successful");
+            model.addAttribute("messageType", "success");
+            model.addAttribute("track", savedTrack);
+        } catch (Exception e) {
+            model.addAttribute("message", "Upload failed: " + e.getMessage());
+            model.addAttribute("messageType", "error");
+        }
         return "upload";
     }
 }

@@ -49,14 +49,14 @@ public class TrackRepository {
 
     public void create(Track track){
         var updated = jdbcClient.sql("INSERT INTO track (id, artist, label, title, trackLength, releaseYear, releaseType, fileFormat, sampleRate) values (?,?,?,?,?,?,?,?,?)")
-                .params(track.id(), track.artist(), track.label(), track.title(), track.trackLength(), track.releaseYear(), track.releaseType().toString(), track.fileFormat(), track.sampleRate())
+                .params(track.id(), track.artist(), track.label(), track.title(), track.trackLength(), track.releaseYear(), track.releaseType(), track.fileFormat(), track.sampleRate())
                 .update();
         Assert.state (updated == 1, "Track konnte nicht erstellt werden");
     }
 
     public void update(Track track, Integer id){
         var updated = jdbcClient.sql("UPDATE track SET title = ?, label = ?, artist = ?, trackLength = ?, releaseYear = ?, releaseType = ?, fileFormat = ?, sampleRate = ? where id = ?")
-                .params(track.title(), track.label(), track.artist(), track.trackLength(), track.releaseYear(), track.releaseType().toString(), track.fileFormat(), track.sampleRate(), id)
+                .params(track.title(), track.label(), track.artist(), track.trackLength(), track.releaseYear(), track.releaseType(), track.fileFormat(), track.sampleRate(), id)
                 .update();
         Assert.state (updated == 1, "Track konnte nicht aktualisiert werden");
     }

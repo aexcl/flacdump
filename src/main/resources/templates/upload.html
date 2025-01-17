@@ -38,7 +38,25 @@
       text-align: left;
       font-size: 1rem;
     }
+    .message {
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      display: none;
+    }
 
+    .message.success {
+      background-color: #4caf50;
+      color: white;
+      display: block;
+    }
+
+    .message.error {
+      background-color: #e53935;
+      color: white;
+      display: block;
+    }
     input[type="text"],
     input[type="file"] {
       display: block;
@@ -72,6 +90,8 @@
 <body>
   <div class="container">
     <h1>Upload a file</h1>
+
+    <div class="message" th:classappend="${messageType}" th:text="${message}" th:if="${message != null}"></div>
 
     <form th:action="@{/upload}" method="post" enctype="multipart/form-data">
       <label for="artist">Artist:</label>

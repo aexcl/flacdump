@@ -13,10 +13,10 @@ public record Track(
         String artist,
         String label,
         String title,
-        @Positive
+        //@Positive
         Integer trackLength,
         Integer releaseYear,
-        ReleaseType releaseType,
+        String releaseType,
         String fileFormat,
         Integer sampleRate,
         Integer bitrate,
@@ -25,8 +25,8 @@ public record Track(
         String fileLocation
 ) {
     public Track {
-        if (trackLength <= 0) {
-            throw new IllegalArgumentException("Tracklänge darf nicht negativ sein");
-        }
+//        if (trackLength < 0) {
+//            throw new IllegalArgumentException("Tracklänge darf nicht negativ sein");
+//        }
     }
 }
