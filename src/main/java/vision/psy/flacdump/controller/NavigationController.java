@@ -6,14 +6,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+import vision.psy.flacdump.model.Track;
 import vision.psy.flacdump.model.UserAccount;
+import vision.psy.flacdump.service.TrackService;
 import vision.psy.flacdump.service.UserService;
+
 
 @Controller
 public class NavigationController {
 
     @Autowired
     private UserService userService;
+
+    private final TrackService trackService;
+
+    public NavigationController(TrackService trackService) {
+        this.trackService = trackService;
+    }
 
     @GetMapping("/")
     public String landing() {
@@ -23,6 +33,16 @@ public class NavigationController {
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+
+    @GetMapping("/upload")
+    public String upload() {
+        return "upload";
+    }
+
+    @GetMapping("/index")
+    public String index() {
+        return "index";
     }
 
     @PostMapping("/login")
@@ -36,8 +56,19 @@ public class NavigationController {
         }
     }
 
-    @GetMapping("/index")
-    public String index() {
-        return "index";
+    @PostMapping("/upload")
+    public String handleUpload(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("artist") String artist,
+            @RequestParam("label") String label,
+            @RequestParam("title") String title,
+            Model model
+    ) {
+        Track track = new Track(null, artist, label, title, null, null, null, null, null, null, null, null, null);
+        Track savedTrack = trackService.uploadTrack(file, track);
+        // Hier noch Upload-Status zurückgeben (Upload erfolgreich, fehlgeschlagen o.Ä.)
+        model.addAttribute("message", "Upload successful");
+        model.addAttribute("track", savedTrack);
+        return "upload";
     }
 }

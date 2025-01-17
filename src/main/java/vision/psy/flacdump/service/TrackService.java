@@ -19,37 +19,31 @@ public class TrackService {
 
     private final TrackRepository trackRepository;
 
-    // Pfad zum Ordner, in dem wir Audio-Dateien speichern wollen
-    // Das kann auch aus application.properties konfigurierbar gemacht werden
+    // Später in application.properties auslagern
+    // Pfad zum Ordner, in dem die Dateien gespeichert werden sollen
     private final String uploadDir = "/home/alex/Documents/Projekt Flacdump/storage";
 
     public TrackService(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
     }
 
-    /**
-     * Nimmt ein MultipartFile entgegen (z.B. hochgeladen von einem REST-Endpunkt),
-     * speichert es auf dem Dateisystem und legt anschließend einen DB-Eintrag an.
-     */
+
+//      Nimmt ein MultipartFile entgegen (z.B. hochgeladen von einem REST-Endpunkt),
+//      speichert es auf dem Dateisystem und legt anschließend einen DB-Eintrag an.
+
     public Track uploadTrack(MultipartFile file, Track trackMetadata) {
         try {
-            // 1) Prüfen, ob uploadDir existiert, sonst erstellen
             File dir = new File(uploadDir);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-
-            // 2) Zieldatei bestimmen
+            // Zieldatei bestimmen
             String originalFilename = file.getOriginalFilename();
-            // Evtl. unique Name generieren, z.B. UUID + Original-Endung
             String uniqueFilename = System.currentTimeMillis() + "_" + originalFilename;
-
             File destinationFile = new File(dir, uniqueFilename);
 
-            // 3) Datei auf Festplatte kopieren
+            // Datei auf Festplatte kopieren
             file.transferTo(destinationFile);
+            log.info("Datei erfolgreich gespeichert: {}", destinationFile);
 
-            // 4) trackMetadata um den Pfad ergänzen
+            // trackMetadata um den Pfad ergänzen
             Track trackToSave = new Track(
                     trackMetadata.id(),
                     trackMetadata.artist(),
@@ -66,8 +60,8 @@ public class TrackService {
                     destinationFile.getAbsolutePath() // <-- fileLocation
             );
 
-            // 5) In DB speichern
-            trackRepository.create(trackToSave); // bei dir: create(Track)
+            // In DB speichern
+            trackRepository.create(trackToSave);
             log.info("Track in DB gespeichert: {}", trackToSave);
 
             return trackToSave;
@@ -77,9 +71,7 @@ public class TrackService {
         }
     }
 
-    /**
-     * Einfaches Beispiel: Hole Track by ID
-     */
+//     Get Track by ID
     public Track getTrackById(Integer id) {
         Optional<Track> optTrack = trackRepository.getById(id);
         if (optTrack.isEmpty()) {
@@ -88,5 +80,5 @@ public class TrackService {
         return optTrack.get();
     }
 
-    // weitere Methoden, z.B. deleteTrackById, updateTrack, usw
+    // weitere Methoden, z.B. getByName/Artist/Label; deleteTrackById, updateTrack, usw
 }

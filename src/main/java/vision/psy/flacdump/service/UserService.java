@@ -9,8 +9,10 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-// User interaction service
-// oldschool JDBC code
+// Manueller User Service
+// anfällig für SQL-Injections
+// wird durch Spring Security ersetzt
+
 @Service
 public class UserService {
     final static String usernameDB = System.getenv("DB_USERNAME");

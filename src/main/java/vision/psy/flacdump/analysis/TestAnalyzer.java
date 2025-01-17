@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TestAnalyzer {
-// test class to analyze a FLAC file and convert its metadata to a JSON string
-// testing before implementing the actual analyzer
+// Testklasse für die Analyse von FLAC-Dateien
+// Funktionstest bevor in TrackService integriert wird
     public String analyzeFlacToJson(String filePath) throws IOException {
         File file = new File(filePath);
         Map<String, String> metadata = new HashMap<>();
@@ -27,7 +27,7 @@ public class TestAnalyzer {
             Tag tag = audioFile.getTag();
 
             if (tag != null) {
-                // Extract metadata fields
+                // Extrahiere allgemeine Metadaten
                 metadata.put("Title", tag.getFirst(FieldKey.TITLE));
                 metadata.put("Artist", tag.getFirst(FieldKey.ARTIST));
                 metadata.put("Album", tag.getFirst(FieldKey.ALBUM));
@@ -37,7 +37,7 @@ public class TestAnalyzer {
                 metadata.put("Disc", tag.getFirst(FieldKey.DISC_NO));
             }
 
-            // Add audio-specific information
+            // Speichere spezifische Metadaten
             metadata.put("Duration", String.valueOf(audioFile.getAudioHeader().getTrackLength()));
             metadata.put("Bitrate", audioFile.getAudioHeader().getBitRate());
             metadata.put("SampleRate", audioFile.getAudioHeader().getSampleRate());
@@ -46,7 +46,7 @@ public class TestAnalyzer {
             throw new IOException("Failed to read FLAC file metadata", e);
         }
 
-        // Convert the metadata map to a JSON string
+        // Konvertiere Metadaten in JSON
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(metadata);
     }

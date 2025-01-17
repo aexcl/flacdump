@@ -3,6 +3,9 @@ package vision.psy.flacdump.model;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
+// Manuelle Model-Klasse für Benutzerkonten mit eigener Passwort-Hash-Funktion
+// Wird später in Spring Security überführt bzw. ersetzt
+
 public class UserAccount {
     public Integer id;
     public String name;
