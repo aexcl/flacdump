@@ -1,4 +1,6 @@
-FLAC & WAV File Sharing Platform
+FLAC & WAV File Sharing Platform. A Spring Boot project for sharing FLAC and WAV files effortlessly.
+
+
 
 Project Overview
 
