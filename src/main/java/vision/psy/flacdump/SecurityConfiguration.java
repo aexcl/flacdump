@@ -1,3 +1,9 @@
+/*
+    *  Security Klasse für die Authentifizierung und Autorisierung
+    *  ... to be continued
+ */
+
+
 //package vision.psy.flacdump;
 //
 //import org.springframework.context.annotation.Bean;

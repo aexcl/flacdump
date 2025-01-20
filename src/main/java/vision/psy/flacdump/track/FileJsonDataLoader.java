@@ -10,7 +10,6 @@ import vision.psy.flacdump.repository.TrackRepository;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 public class FileJsonDataLoader implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(FileJsonDataLoader.class);

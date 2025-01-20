@@ -56,7 +56,7 @@ public class TrackService {
             Track extractedMetadata = extractMetadataFromFile(destinationFile);
             // Falls Metadaten übergeben wurden, diese verwenden
             Track trackToSave = new Track( trackMetadata.id() != null ? trackMetadata.id() : extractedMetadata.id(),
-                    // Artist: Vorrang User? oder Vorrang File? Hier Beispiel: Wenn User-Feld leer, dann aus File
+                    // Wenn User-Feld leer, dann aus File
                     (trackMetadata.artist() != null && !trackMetadata.artist().isBlank())
                             ? trackMetadata.artist()
                             : extractedMetadata.artist(),
@@ -90,7 +90,7 @@ public class TrackService {
                     (trackMetadata.albumArt() != null && !trackMetadata.albumArt().isBlank())
                             ? trackMetadata.albumArt()
                             : extractedMetadata.albumArt(),
-                    destinationFile.getAbsolutePath() // Pfad aktualisieren
+                    destinationFile.getAbsolutePath()
             );
 
             // In DB speichern
@@ -104,7 +104,7 @@ public class TrackService {
         }
     }
 
-    private Track extractMetadataFromFile(File audioFile) throws IOException {
+    public Track extractMetadataFromFile(File audioFile) throws IOException {
         try {
             AudioFile af = AudioFileIO.read(audioFile);
             Tag tag = af.getTag();
@@ -138,12 +138,10 @@ public class TrackService {
                 }
             }
 
-            // AudioHeader auslesen
             if (af.getAudioHeader() != null) {
                 trackLength = af.getAudioHeader().getTrackLength();
                 format      = af.getAudioHeader().getFormat();
 
-                // Bitrate und SampleRate müssen ggf. nach int geparsed werden
                 String bitRateString = af.getAudioHeader().getBitRate();
                 if (bitRateString != null && !bitRateString.isBlank()) {
                     try {
@@ -175,8 +173,8 @@ public class TrackService {
                     sampleRate,
                     bitrate,
                     genre,
-                    null,          // erstmal null, später anpassen
-                    null
+                    null,
+                    audioFile.getAbsolutePath()
             );
 
         } catch (CannotReadException | ReadOnlyFileException | InvalidAudioFrameException | TagException e) {

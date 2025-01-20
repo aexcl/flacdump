@@ -10,6 +10,9 @@ import vision.psy.flacdump.model.Track;
 import java.util.List;
 import java.util.Optional;
 
+// zu Lernzwecken alles Plain old Java
+// wird noch komplett mit JPA oder Hibernate bzw Spring Data umgeschrieben
+
 @Repository
 public class TrackRepository {
 
@@ -48,8 +51,8 @@ public class TrackRepository {
     }
 
     public void create(Track track){
-        var updated = jdbcClient.sql("INSERT INTO track (id, artist, label, title, trackLength, releaseYear, releaseType, fileFormat, sampleRate) values (?,?,?,?,?,?,?,?,?)")
-                .params(track.id(), track.artist(), track.label(), track.title(), track.trackLength(), track.releaseYear(), track.releaseType(), track.fileFormat(), track.sampleRate())
+        var updated = jdbcClient.sql("INSERT INTO track (id, artist, label, title, trackLength, releaseYear, releaseType, fileFormat, sampleRate, fileLocation) values (?,?,?,?,?,?,?,?,?,?)")
+                .params(track.id(), track.artist(), track.label(), track.title(), track.trackLength(), track.releaseYear(), track.releaseType(), track.fileFormat(), track.sampleRate(),/* track.bitrate(), track.genre(), track.albumArt(),*/ track.fileLocation())
                 .update();
         Assert.state (updated == 1, "Track konnte nicht erstellt werden");
     }
