@@ -12,8 +12,8 @@ public record Track(
         @NotEmpty
         String artist,
         String label,
+        @NotEmpty
         String title,
-        //@Positive
         Integer trackLength,
         Integer releaseYear,
         String releaseType,
@@ -25,8 +25,5 @@ public record Track(
         String fileLocation
 ) {
     public Track {
-//        if (trackLength < 0) {
-//            throw new IllegalArgumentException("Tracklänge darf nicht negativ sein");
-//        }
     }
 }

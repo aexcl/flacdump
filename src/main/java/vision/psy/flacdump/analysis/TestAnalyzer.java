@@ -15,12 +15,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TestAnalyzer {
-// Testklasse für die Analyse von FLAC-Dateien
-// Funktionstest bevor in TrackService integriert wird
+// Testklasse für die Analyse von HQ Audiodateien
+// später Integration in TrackService
     public String analyzeFlacToJson(String filePath) throws IOException {
         File file = new File(filePath);
         Map<String, String> metadata = new HashMap<>();
-
 
         try {
             AudioFile audioFile = AudioFileIO.read(file);
