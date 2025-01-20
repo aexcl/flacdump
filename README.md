@@ -18,9 +18,11 @@ Features
 
 File Management: Upload and download FLAC and WAV files.
 
+Extracting Metadata and saving into a MySQL database.
+
 User Access Control: Restricted access to a small group of users.
 
-Simple & Elegant Design: Aesthetic functional web interface.
+Simple yet functioning Web Interface.
 
 Note: This application is in its early stages.
 
@@ -30,7 +32,7 @@ Backend: Java, Spring Boot
 
 Frontend: Thymeleaf
 
-Database: MySQL / MariaDB
+Database: MySQL
 
 Other Tools: Maven, more to come.
 
