@@ -3,8 +3,9 @@ package vision.psy.flacdump.model;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 
-// Muss komplett überarbeitet werden. Keine Verwendung von Records
-// JPA oder Hibernate verwenden
+// Record für die Datenbank-Entität Track
+// *** POJO zu Lernzwecken ***
+// wird durch JPA / Hibernate ersetzt
 
 public record Track(
         @Positive
