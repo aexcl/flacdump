@@ -10,8 +10,8 @@ import vision.psy.flacdump.model.Track;
 import java.util.List;
 import java.util.Optional;
 
-// zu Lernzwecken alles Plain old Java
-// wird noch komplett mit JPA oder Hibernate bzw Spring Data umgeschrieben
+// zu Lernzwecken Plain old Java Code
+// wird durch TrackHibernateRepository ersetzt
 
 @Repository
 public class TrackRepository {

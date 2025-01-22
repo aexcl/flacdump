@@ -6,9 +6,10 @@ import jakarta.persistence.*;
 // und die Datenbank-Entität Track mithilfe von Hibernate abbilden
 
 @Entity
+@Table(name = "track")
 public class TrackHibernate {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
     @Column(nullable = false)
     public String artist;
@@ -27,12 +28,12 @@ public class TrackHibernate {
     @Column
     public Long sampleRate;
     @Column
-    public Long bitrate;
+    public Long bitRate;
     @Column
     public String genre;            // Später Enum
     @Lob
     @Column(columnDefinition = "BLOB")
-    public byte albumArt;
+    public byte[] albumArt;
     @Column(nullable = false)
     public String fileLocation;     // Später ggf verschlüsseln
 
