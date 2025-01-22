@@ -46,7 +46,6 @@ public class NavigationController {
 //        return "index";
 //    }
 
-
     @PostMapping("/login")
     public String authenticate(@RequestParam String username, @RequestParam String password, Model model) {
         UserAccount userAccount = userService.login(username, password);

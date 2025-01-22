@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 // neue TrackRepository mit Hibernate
-// wird die alte TrackRepository ersetzen
 
 @Repository
 public interface TrackRepository extends JpaRepository<Track, Integer> {

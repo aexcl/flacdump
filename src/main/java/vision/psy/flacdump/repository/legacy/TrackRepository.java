@@ -1,3 +1,5 @@
+// Ehemaliges jdbc Repository. Durch JPA / Hibernate ersetzt.
+
 /*package vision.psy.flacdump.repository.legacy;
 
 import org.slf4j.Logger;

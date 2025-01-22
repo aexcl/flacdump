@@ -2,8 +2,7 @@ package vision.psy.flacdump.model;
 
 import jakarta.persistence.*;
 
-// Diese Klasse wird den bestehenden Track-Record ersetzen
-// und die Datenbank-Entität Track mithilfe von Hibernate abbilden
+// Klasse zur Abbildung der Datenbank-Entität Track
 
 @Entity
 @Table(name = "track")

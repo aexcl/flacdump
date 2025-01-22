@@ -1,3 +1,5 @@
+// ehemaliger Record, der durch JPA / Hibernate ersetzt wurde
+
 /*package vision.psy.flacdump.model.legacy;
 
 import jakarta.validation.constraints.NotEmpty;
