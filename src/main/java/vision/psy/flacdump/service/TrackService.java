@@ -12,14 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import vision.psy.flacdump.exceptions.TrackNotFoundException;
 import vision.psy.flacdump.model.Track;
 import vision.psy.flacdump.repository.TrackRepository;
-import vision.psy.flacdump.exceptions.TrackNotFoundException;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
-
 
 @Service
 public class TrackService {
@@ -55,46 +54,32 @@ public class TrackService {
             // Metadaten auslesen
             Track extractedMetadata = extractMetadataFromFile(destinationFile);
             // Falls Metadaten übergeben wurden, diese verwenden
-            Track trackToSave = new Track( trackMetadata.id() != null ? trackMetadata.id() : extractedMetadata.id(),
-                    // Wenn User-Feld leer, dann aus File
-                    (trackMetadata.artist() != null && !trackMetadata.artist().isBlank())
-                            ? trackMetadata.artist()
-                            : extractedMetadata.artist(),
-                    (trackMetadata.label() != null && !trackMetadata.label().isBlank())
-                            ? trackMetadata.label()
-                            : extractedMetadata.label(),
-                    (trackMetadata.title() != null && !trackMetadata.title().isBlank())
-                            ? trackMetadata.title()
-                            : extractedMetadata.title(),
-                    trackMetadata.trackLength() != null
-                            ? trackMetadata.trackLength()
-                            : extractedMetadata.trackLength(),
-                    trackMetadata.releaseYear() != null
-                            ? trackMetadata.releaseYear()
-                            : extractedMetadata.releaseYear(),
-                    (trackMetadata.releaseType() != null && !trackMetadata.releaseType().isBlank())
-                            ? trackMetadata.releaseType()
-                            : extractedMetadata.releaseType(),
-                    (trackMetadata.fileFormat() != null && !trackMetadata.fileFormat().isBlank())
-                            ? trackMetadata.fileFormat()
-                            : extractedMetadata.fileFormat(),
-                    trackMetadata.sampleRate() != null
-                            ? trackMetadata.sampleRate()
-                            : extractedMetadata.sampleRate(),
-                    trackMetadata.bitrate() != null
-                            ? trackMetadata.bitrate()
-                            : extractedMetadata.bitrate(),
-                    (trackMetadata.genre() != null && !trackMetadata.genre().isBlank())
-                            ? trackMetadata.genre()
-                            : extractedMetadata.genre(),
-                    (trackMetadata.albumArt() != null && !trackMetadata.albumArt().isBlank())
-                            ? trackMetadata.albumArt()
-                            : extractedMetadata.albumArt(),
-                    destinationFile.getAbsolutePath()
-            );
+            Track trackToSave = new Track();
+            trackToSave.setId(trackMetadata.getId() != null ? trackMetadata.getId() : extractedMetadata.getId());
+            trackToSave.setArtist(
+                    (trackMetadata.getArtist() != null && !trackMetadata.getArtist().isBlank())
+                            ? trackMetadata.getArtist()
+                            : extractedMetadata.getArtist());
+            trackToSave.setLabel(
+                    (trackMetadata.getLabel() != null && !trackMetadata.getLabel().isBlank())
+                            ? trackMetadata.getLabel()
+                            : extractedMetadata.getLabel());
+            trackToSave.setTitle(
+                    (trackMetadata.getTitle() != null && !trackMetadata.getTitle().isBlank())
+                            ? trackMetadata.getTitle()
+                            : extractedMetadata.getTitle());
+            trackToSave.setTrackLength(
+                    trackMetadata.getTrackLength() != null
+                            ? trackMetadata.getTrackLength()
+                            : extractedMetadata.getTrackLength());
+            trackToSave.setReleaseYear(
+                    trackMetadata.getReleaseYear() != null
+                            ? trackMetadata.getReleaseYear()
+                            : extractedMetadata.getReleaseYear());
+            trackToSave.setFileLocation(destinationFile.getAbsolutePath());
 
             // In DB speichern
-            trackRepository.create(trackToSave);
+            trackRepository.save(trackToSave);
             log.info("Track in DB gespeichert: {}", trackToSave);
 
             return trackToSave;
@@ -170,8 +155,8 @@ public class TrackService {
                     year,
                     releaseType,
                     format,
-                    sampleRate,
-                    bitrate,
+                    sampleRate.longValue(),
+                    bitrate.longValue(),
                     genre,
                     null,
                     audioFile.getAbsolutePath()
@@ -184,11 +169,8 @@ public class TrackService {
 
 //     Get Track by ID
     public Track getTrackById(Integer id) {
-        Optional<Track> optTrack = trackRepository.getById(id);
-        if (optTrack.isEmpty()) {
-            throw new TrackNotFoundException();
-        }
-        return optTrack.get();
+        return trackRepository.findById(id)
+                .orElseThrow(TrackNotFoundException::new);
     }
 
     // weitere Methoden, z.B. downloadTrack, getByName/Artist/Label; deleteTrackById, usw

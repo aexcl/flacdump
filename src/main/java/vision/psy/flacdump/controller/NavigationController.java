@@ -67,7 +67,7 @@ public class NavigationController {
             Model model
     ) {
         try{
-            Track track = new Track(null, artist, label, title, null, null, null, null, null, null, null, null, null);
+            Track track = new Track();
             Track savedTrack = trackService.uploadTrack(file, track);
             model.addAttribute("message", "Upload successful");
             model.addAttribute("messageType", "success");

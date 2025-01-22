@@ -3,8 +3,8 @@ package vision.psy.flacdump.controller;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import vision.psy.flacdump.model.Track;
 import vision.psy.flacdump.exceptions.TrackNotFoundException;
+import vision.psy.flacdump.model.Track;
 import vision.psy.flacdump.repository.TrackRepository;
 
 import java.util.List;
@@ -21,22 +21,21 @@ public class FileController {
 
     // Get
     @GetMapping({"", "/"})
-    List<Track> getAll(){
-        return trackRepository.getAll();
+    public List<Track> findAll(){
+        return trackRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    Track getById(@PathVariable Integer id){
-
-        Optional<Track> track = trackRepository.getById(id);
+    public Track findById(@PathVariable Integer id){
+        Optional<Track> track = trackRepository.findById(id);
         if (track.isEmpty()) {
             throw new TrackNotFoundException();}
         return track.get();
     }
 
-    @GetMapping("/{artist}")
-    Track geByArtist(@PathVariable String artist){
-        Optional<Track> track = trackRepository.getByArtist(artist);
+    @GetMapping("/artist/{artist}")
+    public Track findByArtist(@PathVariable String artist){
+        Optional<Track> track = trackRepository.findByArtist(artist);
         if (track.isEmpty()) {
             throw new TrackNotFoundException();}
         return track.get();
@@ -45,23 +44,29 @@ public class FileController {
     // Post
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    void createFile(@Valid @RequestBody Track track){
-        trackRepository.create(track);
+    public void createFile(@Valid @RequestBody Track track) {
+        trackRepository.save(track);
     }
 
-
     // Put
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    void updateFile(@Valid @RequestBody Track track, @PathVariable Integer id){
-        trackRepository.update(track, id);
+    public void updateFile(@PathVariable Integer id, @Valid @RequestBody Track track) {
+        if (!trackRepository.existsById(id)) {
+            throw new TrackNotFoundException();
+        }
+        track.setId(id);
+        trackRepository.save(track);
     }
 
 
     // Delete
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    void deleteFile(@PathVariable Integer id){
-        trackRepository.delete(id);
+    public void deleteFile(@PathVariable Integer id){
+        if(!trackRepository.existsById(id)){
+            throw new TrackNotFoundException();
+        }
+        trackRepository.deleteById(id);
     }
 }
