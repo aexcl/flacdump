@@ -41,10 +41,6 @@ public class NavigationController {
         return "upload";
     }
 
-//    @GetMapping("/index")
-//    public String index() {
-//        return "index";
-//    }
 
     @PostMapping("/login")
     public String authenticate(@RequestParam String username, @RequestParam String password, Model model) {
