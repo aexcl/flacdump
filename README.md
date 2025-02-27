@@ -1,5 +1,8 @@
 FLAC & WAV File Sharing Platform. A Spring Boot project for sharing FLAC and WAV files effortlessly.
 
+*** This is a private project to build web applications and learn the spring framework. I use it alongside my retraining as an IT specialist for application development to gain more in-depth knowledge. ***
+*** Dies ist ein privates Projekt zur Erstellung von Webanwendungen und zum Erlernen des Spring-Frameworks. Ich nutze es neben meiner Umschulung zum Fachinformatiker für Anwendungsentwicklung um meine Kenntnisse zu vertiefen. ***
+
 
 
 Project Overview
