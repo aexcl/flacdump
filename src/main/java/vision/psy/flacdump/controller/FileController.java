@@ -59,7 +59,6 @@ public class FileController {
         trackRepository.save(track);
     }
 
-
     // Delete
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")

@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import vision.psy.flacdump.model.Track;
 import vision.psy.flacdump.model.UserAccount;
 import vision.psy.flacdump.service.TrackService;
-import vision.psy.flacdump.service.UserService;
+import vision.psy.flacdump.service.legacy.UserService;
 
 // Überarbeitung mit Spring Security
 

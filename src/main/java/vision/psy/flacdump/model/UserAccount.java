@@ -6,7 +6,7 @@ import java.security.MessageDigest;
 // Manuelle Model-Klasse für Benutzerkonten mit Passwort-Hash-Funktion
 // Wird später in Spring Security überführt bzw. ersetzt
 
-public class UserAccount {
+public class        UserAccount {
     public Integer id;
     public String name;
     public String password;

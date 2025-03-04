@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import vision.psy.flacdump.service.UserService;
 
 @SpringBootApplication(scanBasePackages = "vision.psy.flacdump")
 public class Application {
